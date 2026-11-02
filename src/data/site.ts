@@ -20,7 +20,7 @@ export interface Noticia { fecha: string; titulo: string; texto?: string; url?: 
  * `precio` siempre como cadena («desde 1.890 €»); `periodo` es a qué se refiere («al mes», «al día», «la hora»);
  * `incluye` es UNA cadena separada por «;» o comas («Pensión completa; enfermería 24 h»), nunca una lista.
  */
-export interface Estancia { nombre: string; texto: string; precio: string; periodo: string; incluye: string; imagen: string }
+export interface Estancia { nombre: string; texto: string; precio: string; periodo: string; incluye: string; imagen: string; detalle?: string; imagenes?: string; slug?: string }
 
 export interface Seccion {
   activa: boolean;
@@ -103,6 +103,7 @@ function normalizar(s: Crudo = {}): Seccion {
     estancias: lista<Crudo>(s.estancias)
       .filter((e) => texto(e.nombre))
       .map((e) => ({
+        ...e, // conserva `detalle`, `imagenes` y `slug` (páginas propias, src/lib/paginas.ts)
         nombre: texto(e.nombre),
         texto: texto(e.texto),
         precio: texto(e.precio),

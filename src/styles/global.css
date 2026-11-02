@@ -170,6 +170,12 @@
   .estancia-precio { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem; margin-top: 1rem; padding: .7rem 0; border-block: 1px solid var(--linea-clara); }
   .estancia-precio b { font-family: var(--fuente-titulos); font-size: 1.6rem; font-weight: 600; color: var(--ocre-luz); }
   .estancia-texto { margin-top: 1rem; opacity: .9; }
+  .estancia--enlace { position: relative; }
+  .estancia-enlace { color: inherit; text-decoration: none; }
+  .estancia-enlace::after { content: ""; position: absolute; inset: 0; }
+  .estancia-enlace:focus-visible { outline: none; }
+  .estancia--enlace:has(.estancia-enlace:focus-visible) { outline: 3px solid var(--ocre-luz); outline-offset: 6px; }
+  .estancia-ver { display: inline-flex; align-items: center; gap: .3rem; margin-top: 1rem; font-weight: 750; color: var(--ocre-luz); }
   .estancia-incluye { display: grid; gap: .5rem; margin-top: 1.25rem; font-size: 1rem; }
   .estancia-incluye li { display: flex; gap: .6rem; align-items: flex-start; }
   .estancia-incluye svg { flex-shrink: 0; margin-top: .2rem; color: var(--ocre-luz); }

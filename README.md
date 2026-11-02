@@ -14,3 +14,7 @@ geriátricos. Crema, verde oliva y ocre; serif cálida; letra grande para leer s
 npm ci
 npm run build     # dist/
 ```
+
+## Páginas propias
+- Cada elemento de `secciones.estancias.estancias` con `detalle` tiene su página en `/estancias/<slug>/` (`src/pages/[coleccion]/[slug].astro`).
+- Campos opcionales de los elementos con ficha: `detalle` (párrafos separados por una línea en blanco), `slug` e `imagenes` («/fotos/a.jpg; /fotos/b.jpg»).

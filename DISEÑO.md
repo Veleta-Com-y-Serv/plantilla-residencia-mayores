@@ -49,3 +49,8 @@ sangre. Bandas de bordes rectos (nada de cúpulas ni curvas de borde a borde, qu
 Contrato técnico de `docs/plantillas.md` (plataforma): `site.yaml` única fuente, listas planas, precios como cadena,
 componentes que pintan bien vacíos, `index.astro`, `seo.ts` y endpoints intactos, formulario `mailto`, sin dependencias
 ni fuentes externas, sin scroll horizontal a 375 px.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.

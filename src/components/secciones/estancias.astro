@@ -3,12 +3,14 @@
 // con foto vertical en forma de hoja (dos esquinas opuestas redondeadas), número, nombre, precio + periodo entre filetes,
 // texto y lo que incluye con marcas ocre. `estancias` [{nombre, texto, precio, periodo, incluye, imagen}]: `precio`
 // SIEMPRE como cadena; `incluye` UNA cadena separada por «;» (o por comas si no hay «;»). Lo vacío no se pinta.
-// `cta` opcional al final.
+// `cta` opcional al final. Las estancias con `detalle` tienen página propia (/estancias/<slug>/): el nombre es un
+// enlace y la columna entera es clicable; las demás siguen como antes.
 import { seccion, nueva } from '../../data/site';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
+import { enlaceDe } from '../../lib/paginas';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
 const lista = s?.estancias ?? [];
@@ -23,14 +25,14 @@ const mayuscula = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
       {lista.length > 0 && (
         <div class="estancias" style={`--n:${Math.min(lista.length, 4)}`}>
           {lista.map((e, i) => (
-            <article class="estancia">
+            <article class:list={['estancia', { 'estancia--enlace': !!enlaceDe(e) }]}>
               {e.imagen && (
                 <div class="estancia-foto">
                   <Imagen src={e.imagen} alt={e.nombre} ancho={800} alto={1000} />
                 </div>
               )}
               <p class="estancia-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
-              <h3 class="estancia-titulo">{e.nombre}</h3>
+              <h3 class="estancia-titulo">{enlaceDe(e) ? <a href={enlaceDe(e)} class="estancia-enlace">{e.nombre}</a> : e.nombre}</h3>
               {e.precio && (
                 <p class="estancia-precio">
                   <b>{e.precio}</b>
@@ -38,6 +40,7 @@ const mayuscula = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
                 </p>
               )}
               {e.texto && <p class="estancia-texto">{e.texto}</p>}
+              {enlaceDe(e) && <span class="estancia-ver" aria-hidden="true">Ver más <Icono nombre="flecha" tam={16} /></span>}
               {partes(e.incluye).length > 0 && (
                 <ul class="estancia-incluye" aria-label={`Qué incluye: ${e.nombre}`}>
                   {partes(e.incluye).map((x) => (

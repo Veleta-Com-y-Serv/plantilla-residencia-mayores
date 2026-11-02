@@ -82,9 +82,50 @@ secciones:
     titulo: Para quedarse, para el día o para unas semanas
     texto: "Os enseñamos la casa antes de decidir nada y os damos el precio por escrito, con todo lo que incluye."
     estancias:
-      - { nombre: Plaza residencial, texto: "Habitación individual o doble con baño adaptado, luz natural y vistas al jardín. Para vivir aquí con todos los cuidados.", precio: "desde 1.890 €", periodo: al mes, incluye: "Habitación con baño; pensión completa; enfermería 24 h; fisioterapia; lavandería y planchado", imagen: /fotos/estancia-1.jpg }
-      - { nombre: Centro de día, texto: "De lunes a viernes, de 9:00 a 19:00. Por la mañana actividades y fisioterapia, comida aquí y vuelta a casa por la tarde.", precio: "desde 690 €", periodo: al mes, incluye: "Desayuno, comida y merienda; talleres y fisioterapia; transporte adaptado opcional", imagen: /fotos/estancia-2.jpg }
-      - { nombre: Estancia temporal, texto: "Unas semanas tras una operación o para que la familia descanse. Con los mismos cuidados que una plaza fija.", precio: "desde 75 €", periodo: al día, incluye: "Habitación con baño; pensión completa; enfermería 24 h; mínimo una semana", imagen: /fotos/estancia-3.jpg }
+      - nombre: Plaza residencial
+        texto: "Habitación individual o doble con baño adaptado, luz natural y vistas al jardín. Para vivir aquí con todos los cuidados."
+        precio: "desde 1.890 €"
+        periodo: al mes
+        incluye: "Habitación con baño; pensión completa; enfermería 24 h; fisioterapia; lavandería y planchado"
+        imagen: /fotos/estancia-1.jpg
+        imagenes: "/fotos/instalacion-1.jpg; /fotos/instalacion-2.jpg"
+        detalle: |
+          Vivir en Casa do Souto es instalarse en una habitación propia, individual o doble, con baño adaptado y ventanas al jardín. Cada persona trae lo que quiere de su casa: la butaca, las fotos, la colcha de siempre. La idea es que la habitación se parezca a su dueño y no a una habitación de residencia.
+
+          Desde el primer día se prepara un plan de cuidados con la enfermera, la fisioterapeuta y la terapeuta ocupacional, y se habla con la familia para recoger costumbres, gustos y lo que más tranquiliza. Ese plan se revisa cada pocos meses y se ajusta cuando cambian las necesidades.
+
+          La enfermería está presente día y noche, la comida se cocina en la casa con dietas y texturas adaptadas, y la lavandería y el planchado van incluidos. Hay fisioterapia, talleres de memoria, música, huerto y paseos acompañados por el jardín.
+
+          Las familias pueden venir cuando quieran, comer con su familiar si lo desean y contar con una persona de referencia que les llama y les atiende. Antes de decidir, os enseñamos la casa y os damos por escrito todo lo que incluye la plaza.
+      - nombre: Centro de día
+        texto: "De lunes a viernes, de 9:00 a 19:00. Por la mañana actividades y fisioterapia, comida aquí y vuelta a casa por la tarde."
+        precio: "desde 690 €"
+        periodo: al mes
+        incluye: "Desayuno, comida y merienda; talleres y fisioterapia; transporte adaptado opcional"
+        imagen: /fotos/estancia-2.jpg
+        detalle: |
+          El centro de día es para quien quiere seguir durmiendo en su casa pero necesita compañía, actividad y cuidados durante el día, o para las familias que necesitan un respiro entre semana. La jornada de lunes a viernes empieza con el desayuno y termina con la merienda y la vuelta a casa.
+
+          Por la mañana se hace fisioterapia en pequeños grupos o paseando por el jardín, y talleres de memoria, lectura del periódico, manualidades y juegos de mesa con la terapeuta ocupacional. Después se come en el comedor, que da al huerto, con el menú de la casa y las dietas que cada uno necesite.
+
+          Por la tarde hay descanso en las salas, música o conversación al sol, según el tiempo. Una auxiliar se ocupa de la medicación y del aseo cuando hace falta, y la enfermera está siempre a mano.
+
+          Quien lo necesita puede usar el transporte adaptado, con recogida y vuelta a casa. Muchos usuarios empiezan unos días a la semana y, si les sienta bien, van aumentando poco a poco. Venid a verlo y a probar una jornada de adaptación sin compromiso.
+      - nombre: Estancia temporal
+        texto: "Unas semanas tras una operación o para que la familia descanse. Con los mismos cuidados que una plaza fija."
+        precio: "desde 75 €"
+        periodo: al día
+        incluye: "Habitación con baño; pensión completa; enfermería 24 h; mínimo una semana"
+        imagen: /fotos/estancia-3.jpg
+        imagenes: "/fotos/instalacion-3.jpg"
+        detalle: |
+          La estancia temporal sirve para pasar unas semanas en la casa sin que sea una decisión definitiva. Es habitual después de una operación o de un ingreso en el hospital, cuando todavía hace falta rehabilitación y vigilancia, o cuando la familia que cuida en casa necesita descansar, viajar o recuperar fuerzas.
+
+          La persona ocupa una habitación como cualquier residente, con baño adaptado y vistas al jardín, y recibe los mismos cuidados que una plaza fija: enfermería a cualquier hora, pensión completa, medicación controlada y fisioterapia adaptada a su recuperación.
+
+          Antes de llegar, la enfermera habla con la familia y, si hay informe médico, lo revisa para dejar preparado el plan desde el primer día. Durante la estancia se mantiene el contacto con la familia, que puede visitar sin cita previa.
+
+          Al terminar, se entrega un resumen de cómo ha ido la estancia y de lo que conviene seguir haciendo en casa. Si la persona se ha encontrado a gusto y la familia lo desea, puede quedarse como residente o pasar al centro de día.
       - { nombre: Ayuda a domicilio, texto: "Auxiliares del mismo equipo que van a casa para el aseo, las comidas, la medicación o acompañar a pasear.", precio: "desde 18 €", periodo: la hora, incluye: "Aseo y movilización; preparación de comidas; acompañamiento al médico", imagen: /fotos/estancia-4.jpg }
     cta: { texto: Pedir información de precios, url: "/#visita" }
 
