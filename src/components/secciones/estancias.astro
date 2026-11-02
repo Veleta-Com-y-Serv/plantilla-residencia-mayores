@@ -1,0 +1,58 @@
+---
+// Estancias y servicios con precio sobre oliva honda: hasta 4 columnas en escritorio (2 en tableta, 1 en móvil), cada una
+// con foto vertical en forma de hoja (dos esquinas opuestas redondeadas), número, nombre, precio + periodo entre filetes,
+// texto y lo que incluye con marcas ocre. `estancias` [{nombre, texto, precio, periodo, incluye, imagen}]: `precio`
+// SIEMPRE como cadena; `incluye` UNA cadena separada por «;» (o por comas si no hay «;»). Lo vacío no se pinta.
+// `cta` opcional al final.
+import { seccion, nueva } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista = s?.estancias ?? [];
+const partes = (t: string) => (t ? t.split(t.includes(';') ? ';' : ',').map((x) => x.trim()).filter(Boolean) : []);
+const mayuscula = (x: string) => x.charAt(0).toUpperCase() + x.slice(1);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} banda="honda">
+      <Titular alinear="partido" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {lista.length > 0 && (
+        <div class="estancias" style={`--n:${Math.min(lista.length, 4)}`}>
+          {lista.map((e, i) => (
+            <article class="estancia">
+              {e.imagen && (
+                <div class="estancia-foto">
+                  <Imagen src={e.imagen} alt={e.nombre} ancho={800} alto={1000} />
+                </div>
+              )}
+              <p class="estancia-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</p>
+              <h3 class="estancia-titulo">{e.nombre}</h3>
+              {e.precio && (
+                <p class="estancia-precio">
+                  <b>{e.precio}</b>
+                  {e.periodo && <span>{e.periodo}</span>}
+                </p>
+              )}
+              {e.texto && <p class="estancia-texto">{e.texto}</p>}
+              {partes(e.incluye).length > 0 && (
+                <ul class="estancia-incluye" aria-label={`Qué incluye: ${e.nombre}`}>
+                  {partes(e.incluye).map((x) => (
+                    <li>
+                      <Icono nombre="check" tam={18} />
+                      <span>{mayuscula(x)}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
+      {s.cta?.url && <p class="mt-14 md:mt-20"><a class="btn" href={s.cta.url} {...nueva(s.cta.url)}>{s.cta.texto}</a></p>}
+    </Seccion>
+  )
+}

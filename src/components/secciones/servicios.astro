@@ -1,0 +1,31 @@
+---
+// Servicios sobre crema: titular partido y una rejilla de borde a borde del contenedor (4 columnas en escritorio, 2 en
+// tableta, 1 en móvil) separada por filetes, sin tarjetas. Cada servicio: icono en una hoja salvia, título y texto.
+// `items` [{titulo, texto, icono}]. `cta` opcional al final. Sin servicios, solo el titular.
+import { seccion, nueva } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} banda="crema">
+      <Titular alinear="partido" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.items.length > 0 && (
+        <ul class="servicios">
+          {s.items.map((it) => (
+            <li class="servicio">
+              <span class="servicio-icono"><Icono nombre={it.icono || 'check'} tam={26} /></span>
+              <h3 class="servicio-titulo">{it.titulo}</h3>
+              {it.texto && <p class="servicio-texto">{it.texto}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta?.url && <p class="mt-12"><a class="btn btn--oliva" href={s.cta.url} {...nueva(s.cta.url)}>{s.cta.texto}</a></p>}
+    </Seccion>
+  )
+}

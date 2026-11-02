@@ -1,0 +1,33 @@
+---
+// Banda de cifras en ocre pleno de borde a borde: titular corto a la izquierda y las cifras en serif enorme, cada una con
+// su rótulo bajo una raya. `items` [{titulo (la cifra, como cadena), texto (qué es)}]. Sin cifras no se pinta.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s?.items ?? [];
+---
+
+{
+  s && items.length > 0 && (
+    <Seccion id={Astro.props.id} banda="ocre">
+      {(s.antetitulo || s.titulo || s.texto) && (
+        <div class="cifras-cabeza">
+          <div>
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          </div>
+          {s.texto && <p class="max-w-xl text-[1.1rem]">{s.texto}</p>}
+        </div>
+      )}
+      <ul class="cifras" style={`--n:${Math.min(items.length, 4)}`}>
+        {items.map((it) => (
+          <li>
+            <span class="cifra-num">{it.titulo}</span>
+            {it.texto && <span class="cifra-texto">{it.texto}</span>}
+          </li>
+        ))}
+      </ul>
+    </Seccion>
+  )
+}

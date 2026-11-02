@@ -1,0 +1,40 @@
+---
+// Un día en la residencia: fila 50/50 a sangre sobre trigo. La foto toca el borde izquierdo de la ventana (esquina de
+// hoja arriba a la derecha) y, al otro lado, el titular y la línea del día: hora grande en serif oliva y actividad, entre
+// filetes. `horario` [{hora, actividad}] (también vale {dia, horas}); `imagen` y `texto` opcionales. Sin foto, banda
+// normal con la línea del día a todo el ancho del contenedor.
+import { seccion } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lineas = (s?.horario ?? []).map((h) => ({ hora: h.hora || h.dia, actividad: h.actividad || h.horas }));
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class:list={['banda banda--trigo', { 'sin-relleno': !!s.imagen }]}>
+      <div class:list={[s.imagen ? 'partida' : 'contenedor']}>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+          </div>
+        )}
+        <div class:list={{ 'partida-texto': !!s.imagen }}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {lineas.length > 0 && (
+            <ol class="linea-dia">
+              {lineas.map((l) => (
+                <li>
+                  <span class="linea-dia-hora">{l.hora}</span>
+                  <span class="linea-dia-actividad">{l.actividad}</span>
+                </li>
+              ))}
+            </ol>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

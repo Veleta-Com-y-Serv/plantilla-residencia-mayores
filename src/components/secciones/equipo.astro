@@ -1,0 +1,34 @@
+---
+// Equipo sobre salvia: titular partido y 4 columnas (2 en móvil) con la foto en marco de ventana (arriba en óvalo),
+// nombre en serif, cargo en ocre y texto opcional. `personas` [{nombre, cargo, foto, texto}]; sin `foto`, la silueta
+// /placeholders/persona.svg. Sin personas, solo el titular. También sirve para `tipo: equipo`.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const personas = s?.personas ?? [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} banda="salvia">
+      <Titular alinear="partido" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {personas.length > 0 && (
+        <ul class="equipo">
+          {personas.map((p) => (
+            <li>
+              <div class="persona-foto">
+                <Imagen src={p.foto || '/placeholders/persona.svg'} alt={p.nombre} ancho={600} alto={800} />
+              </div>
+              <h3 class="persona-nombre">{p.nombre}</h3>
+              {p.cargo && <p class="persona-cargo">{p.cargo}</p>}
+              {p.texto && <p class="persona-texto">{p.texto}</p>}
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}

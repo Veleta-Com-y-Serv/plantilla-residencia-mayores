@@ -1,0 +1,50 @@
+---
+// Apartado de texto genérico (site.yaml: `tipo: texto`), a ancho completo. Con foto: fila 50/50 a sangre sobre crema,
+// la foto toca el borde derecho de la ventana (esquina de hoja). Sin foto: banda salvia con el título a la izquierda y
+// el texto a la derecha. Lista con iconos (`items`) y botón (`cta`) opcionales.
+import { seccion, parrafos, nueva } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class:list={['banda', s.imagen ? 'banda--crema sin-relleno' : 'banda--salvia']}>
+      <div class:list={[s.imagen ? 'partida partida--invertida' : 'contenedor']}>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} />
+          </div>
+        )}
+        <div class:list={[s.imagen ? 'partida-texto' : 'grid gap-8 lg:grid-cols-[5fr_7fr] lg:gap-24']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="!mb-0" />
+          <div>
+            {parrafos(s.texto).length > 0 && (
+              <div class:list={['space-y-4 text-[1.15rem] leading-relaxed opacity-90', { 'mt-6': !!s.imagen }]}>
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {s.items.length > 0 && (
+              <ul class="mt-8 grid gap-5">
+                {s.items.map((it) => (
+                  <li class="flex gap-4">
+                    <span class="servicio-icono !h-12 !w-12 shrink-0"><Icono nombre={it.icono || 'check'} tam={22} /></span>
+                    <div>
+                      <p class="font-bold">{it.titulo}</p>
+                      {it.texto && <p class="mt-1 opacity-85">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn mt-8" href={s.cta.url} {...nueva(s.cta.url)}>{s.cta.texto}</a>}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

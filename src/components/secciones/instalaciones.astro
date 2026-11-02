@@ -1,0 +1,34 @@
+---
+// Instalaciones: titular sobre crema y, debajo, un mosaico de fotos de borde a borde de la ventana, sin margen (filetes
+// crema de 4 px). En escritorio, 4 columnas con una foto grande de 2×2 y otra apaisada cada seis; en móvil, 2 columnas
+// con una apaisada cada tres. `galeria`: lista de rutas. Sin fotos, solo el titular. También sirve para `tipo: galeria`.
+import { seccion, nueva } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const fotos = s?.galeria ?? [];
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda banda--crema !pb-0">
+      <div class="contenedor">
+        <Titular alinear="partido" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {s.cta?.url && <p class="-mt-4 mb-12"><a class="btn btn--oliva" href={s.cta.url} {...nueva(s.cta.url)}>{s.cta.texto}</a></p>}
+      </div>
+      {fotos.length > 0 ? (
+        <ul class="mosaico">
+          {fotos.map((f, i) => (
+            <li class="mosaico-foto">
+              <Imagen src={f} alt={altGaleria(i)} ancho={1200} alto={900} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div class="pb-16 md:pb-24" />
+      )}
+    </section>
+  )
+}

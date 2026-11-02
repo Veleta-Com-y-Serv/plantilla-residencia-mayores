@@ -1,0 +1,48 @@
+---
+// Ejemplo de página adicional: usa el layout base y se enlaza desde el pie (o desde site.yaml → menu).
+// Cabecera en banda oliva a todo el ancho y el texto legal sobre crema.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const c = site.contacto;
+---
+
+<Base titulo="Aviso legal y privacidad" descripcion={`Aviso legal y política de privacidad de ${site.nombre}.`}>
+  <section class="banda banda--oliva cabeza-interior">
+    <div class="contenedor">
+      <p class="antetitulo">{site.nombre}</p>
+      <h1 class="titulo-seccion">Aviso legal y privacidad</h1>
+    </div>
+  </section>
+  <section class="banda banda--crema">
+    <article class="contenedor">
+      <div class="texto-largo max-w-3xl">
+        <h2>Quiénes somos</h2>
+        <p>
+          Esta web pertenece a {site.nombre}{c.direccion && `, con domicilio en ${c.direccion}`}. Puedes escribirnos a {
+            c.email || 'nuestro correo de contacto'
+          }{c.telefono && ` o llamarnos al ${c.telefono}`}.
+        </p>
+        <h2>Qué datos tratamos</h2>
+        <p>
+          Solo los que nos envías al escribirnos o al pedir una visita: tu nombre, tu forma de contacto, el servicio que te
+          interesa y lo que nos cuentes en el mensaje. Los usamos para responderte y organizar la visita. No los cedemos a
+          nadie salvo obligación legal.
+        </p>
+        <p>
+          Te pedimos que no incluyas en el formulario datos de salud detallados: los hablaremos en persona o por teléfono,
+          con la confidencialidad que merecen.
+        </p>
+        <h2>Cuánto tiempo los guardamos</h2>
+        <p>El necesario para atender tu consulta y, después, el que marque la ley.</p>
+        <h2>Tus derechos</h2>
+        <p>
+          Puedes pedir acceso, rectificación o supresión de tus datos escribiendo a {c.email || 'nuestro correo'}. También
+          puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).
+        </p>
+        <h2>Cookies</h2>
+        <p>Esta web no usa cookies de seguimiento.</p>
+        <p class="mt-10"><a class="btn btn--oliva" href="/">Volver al inicio</a></p>
+      </div>
+    </article>
+  </section>
+</Base>

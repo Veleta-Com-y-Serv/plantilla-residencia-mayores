@@ -1,0 +1,31 @@
+---
+// Titular a ancho completo: antetítulo en versalitas con una raya ocre delante, título grande en serif cálida y texto.
+// `alinear="partido"`: título a la izquierda y texto a la derecha en escritorio.
+// Adaptado de AstroWind (Headline.astro), © onWidget, MIT.
+interface Props { titulo?: string; antetitulo?: string; texto?: string; alinear?: 'izquierda' | 'centro' | 'partido'; class?: string; nivel?: 1 | 2 }
+const { titulo, antetitulo, texto, alinear = 'izquierda', class: clase = '', nivel = 2 } = Astro.props;
+const H = nivel === 1 ? 'h1' : 'h2';
+const partido = alinear === 'partido' && !!texto;
+---
+
+{
+  (titulo || antetitulo || texto) && (
+    <div class:list={['titular', { 'titular--centro': alinear === 'centro', 'titular--partido': partido }, clase]}>
+      {partido ? (
+        <>
+          <div>
+            {antetitulo && <p class="antetitulo">{antetitulo}</p>}
+            {titulo && <H class="titulo-seccion">{titulo}</H>}
+          </div>
+          <p class="titular-texto">{texto}</p>
+        </>
+      ) : (
+        <>
+          {antetitulo && <p class="antetitulo">{antetitulo}</p>}
+          {titulo && <H class="titulo-seccion">{titulo}</H>}
+          {texto && <p class="titular-texto">{texto}</p>}
+        </>
+      )}
+    </div>
+  )
+}

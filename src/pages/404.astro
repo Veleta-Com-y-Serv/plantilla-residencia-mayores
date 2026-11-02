@@ -1,0 +1,23 @@
+---
+// Página no encontrada con el diseño de la plantilla: banda oliva honda a pantalla casi completa, cifra en serif ocre.
+import Base from '../layouts/Base.astro';
+import { site, tel } from '../data/site';
+const c = site.contacto;
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda banda--honda flex min-h-[78svh] items-center">
+    <div class="contenedor grid items-center gap-8 lg:grid-cols-[6fr_6fr] lg:gap-20">
+      <p class="error-cifra" aria-hidden="true">404</p>
+      <div>
+        <p class="antetitulo">Página no encontrada</p>
+        <h1 class="titulo-seccion">Este pasillo no lleva a ninguna parte</h1>
+        <p class="titular-texto">Puede que el enlace esté mal o que la página se haya movido. Vuelve a la portada de {site.nombre}{c.telefono && ' o llámanos'}.</p>
+        <div class="botones">
+          <a class="btn" href="/">Volver al inicio</a>
+          {c.telefono && <a class="btn-sec" href={tel(c.telefono)}>{c.telefono}</a>}
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

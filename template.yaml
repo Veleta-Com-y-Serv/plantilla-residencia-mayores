@@ -1,0 +1,94 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: residencia-mayores
+nombre: Residencia y centro de día
+descripcion: Web cálida para residencias, centros de día y ayuda a domicilio, con estancias, un día tipo y visitas.
+sectores:
+  - { id: residencia, nombre: Residencia de mayores }
+  - { id: mayores, nombre: Atención a mayores }
+  - { id: centro-dia, nombre: Centro de día }
+  - { id: ayuda-domicilio, nombre: Ayuda a domicilio }
+  - { id: geriatria, nombre: Geriatría }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: servicios, nombre: Servicios }
+  - { id: cifras, nombre: Cifras }
+  - { id: estancias, nombre: Estancias y precios }
+  - { id: instalaciones, nombre: Instalaciones }
+  - { id: un-dia, nombre: Un día en la casa }
+  - { id: equipo, nombre: Equipo }
+  - { id: visita, nombre: Concertar una visita }
+  - { id: opiniones, nombre: Opiniones de las familias }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: calido
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-residencia-mayores.noexpertise.com
+activa: true
+orden: 560
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu residencia"
+    pregunta: "¿Cómo se llama tu residencia o tu servicio y qué lo hace distinto?"
+    ayuda: "Dónde estáis, a quién atendéis (residentes, centro de día, a domicilio) y cómo es el ambiente de la casa."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, secciones.hero.items]
+  - id: contacto
+    titulo: "Cómo os encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar o escribir las familias?"
+    ayuda: "Solo lo que quieras que se vea. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: servicios
+    titulo: "Servicios"
+    pregunta: "¿Qué cuidados y servicios ofrecéis? Enfermería, fisioterapia, talleres, cocina, peluquería, transporte… Uno por línea."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.servicios.items]
+  - id: estancias
+    titulo: "Estancias y precios"
+    pregunta: "¿Qué modalidades tenéis? Plaza residencial, centro de día, estancias temporales, ayuda a domicilio… Cuéntame qué incluye cada una y el precio si quieres."
+    ayuda: "Si prefieres no poner precios, déjalos vacíos: no saldrán."
+    tipo: lista
+    campos: [secciones.estancias.estancias]
+  - id: un-dia
+    titulo: "Un día en la casa"
+    pregunta: "¿Cómo es un día normal? Escribe la hora y lo que se hace, una línea por momento del día."
+    ayuda: "Por ejemplo: 8:30 desayuno; 10:00 fisioterapia o paseo; 13:30 comida…"
+    tipo: lista
+    campos: [secciones.un-dia.horario]
+  - id: equipo
+    titulo: "Tu equipo"
+    pregunta: "¿Quién forma el equipo? Nombre y puesto de las personas que quieras presentar."
+    ayuda: "Las fotos de las personas se ponen luego en Contenido."
+    tipo: lista
+    campos: [secciones.equipo.personas]
+  - id: visita
+    titulo: "Visitas"
+    pregunta: "¿Cómo puede una familia venir a conocer la casa? Cuéntame los pasos y lo que tiene que saber."
+    tipo: texto
+    campos: [secciones.visita.titulo, secciones.visita.texto, secciones.visita.items, secciones.visita.nota]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más las familias? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, las de las estancias, la casa y el jardín."
+    ayuda: "Sube las tuyas o elige una del banco. Mejor sin caras de residentes. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.un-dia.imagen, secciones.instalaciones.galeria]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

@@ -1,0 +1,70 @@
+---
+// Formulario sin servidor: si hay email en site.yaml abre el programa de correo (mailto) con todos los campos en el cuerpo.
+// Si no hay email, se queda como muestra y lo avisa. Para un envío real, cambia `action` por el de tu proveedor.
+// `visita`: añade para quién es, el servicio que interesa (desplegable con las estancias de site.yaml, o texto libre si no
+// hay) y el día preferido para venir. `oscuro`: sobre una banda oscura.
+import { site, nombresEstancias } from '../../data/site';
+interface Props { boton?: string; class?: string; asunto?: string; visita?: boolean; prefijo?: string; oscuro?: boolean }
+const {
+  boton = 'Enviar mensaje',
+  class: clase = '',
+  asunto = `Consulta desde la web de ${site.nombre}`,
+  visita = false,
+  prefijo = 'f',
+  oscuro = false,
+} = Astro.props;
+const email = site.contacto.email;
+const accion = email ? `mailto:${email}?subject=${encodeURIComponent(asunto)}` : '';
+const id = (c: string) => `${prefijo}-${c}`;
+const opciones = visita ? nombresEstancias() : [];
+---
+
+<form class:list={['formulario', { 'formulario--oscuro': oscuro }, clase]} action={accion || undefined} method="post" enctype="text/plain">
+  <div class="formulario-fila">
+    <div class="campo">
+      <label for={id('nombre')}>Tu nombre</label>
+      <input id={id('nombre')} name="nombre" type="text" autocomplete="name" required />
+    </div>
+    <div class="campo">
+      <label for={id('contacto')}>Teléfono o email</label>
+      <input id={id('contacto')} name="contacto" type="text" autocomplete="tel" required />
+    </div>
+  </div>
+  {
+    visita && (
+      <div class="formulario-fila">
+        <div class="campo">
+          <label for={id('servicio')}>Qué os interesa</label>
+          {opciones.length > 0 ? (
+            <select id={id('servicio')} name="servicio">
+              {opciones.map((o) => <option>{o}</option>)}
+              <option>Aún no lo sé</option>
+            </select>
+          ) : (
+            <input id={id('servicio')} name="servicio" type="text" />
+          )}
+        </div>
+        <div class="campo">
+          <label for={id('dia')}>Día que os viene bien</label>
+          <input id={id('dia')} name="dia" type="date" />
+        </div>
+      </div>
+    )
+  }
+  <div class="campo">
+    <label for={id('mensaje')}>{visita ? 'Para quién es y qué necesita' : 'Mensaje'}</label>
+    <textarea id={id('mensaje')} name="mensaje" rows="4" required={!visita}></textarea>
+  </div>
+  <label class="campo-check">
+    <input type="checkbox" name="privacidad" required />
+    <span>He leído el <a href="/aviso-legal">aviso legal y la política de privacidad</a>.</span>
+  </label>
+  <button type="submit" class="btn">{boton}</button>
+  <p class="formulario-aviso">
+    {
+      email
+        ? 'Al enviar se abre tu programa de correo con el mensaje listo.'
+        : 'Formulario de muestra: todavía no envía mensajes. Usa el teléfono o el email de contacto.'
+    }
+  </p>
+</form>

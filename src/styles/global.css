@@ -1,0 +1,299 @@
+/* Residencia y centro de día — estilo cálido a ancho completo, concepto «la casa del jardín»: crema + verde oliva +
+   ocre. Bandas de borde a borde que alternan crema, trigo, oliva, oliva honda y ocre pleno, de bordes rectos.
+   Portada a pantalla completa con la foto del jardín a sangre y un gran panel oliva anclado abajo a la izquierda,
+   con la esquina de arriba a la derecha muy redondeada (la «hoja», el motivo de la plantilla: fotos y bloques con una
+   o dos esquinas opuestas redondeadas). Serif cálida de sistema (Charter, Sitka, Cambria) en redonda y seminegra
+   para los títulos; sans de sistema a 18 px para leer sin esfuerzo; antetítulos en versalitas con una raya ocre;
+   botones rectangulares de 52 px, grandes y claros. Pensada también para quien lee con dificultad: letra grande,
+   alto contraste, objetivos táctiles amplios.
+   Todo sale de las cuatro variables de color de site.yaml (--c-primario, --c-acento, --c-fondo, --c-texto):
+   el diseño cuenta con un primario oscuro (oliva), un acento cálido medio (ocre) y un fondo claro. */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-titulos: Charter, "Bitstream Charter", "Sitka Heading", "Sitka Text", Cambria, "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --fuente-texto: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radio: .5rem; --ritmo: 4.5rem; --ritmo-md: 7.5rem; --ancho: 90rem;
+  --alto-franja: 2.5rem;
+  --alto-cabecera: 4.5rem;
+  /* La «hoja»: radio grande de las esquinas redondeadas */
+  --hoja: clamp(3.5rem, 9vw, 10rem);
+  /* Derivados (siguen funcionando si el cliente cambia los colores) */
+  --oliva: var(--c-primario);
+  --oliva-honda: color-mix(in srgb, var(--c-primario) 60%, #000);
+  --ocre: var(--c-acento);
+  --ocre-texto: color-mix(in srgb, var(--c-acento) 55%, var(--c-texto));
+  --ocre-luz: color-mix(in srgb, var(--c-acento) 62%, #fff);
+  --crema: var(--c-fondo);
+  --trigo: color-mix(in srgb, var(--c-fondo) 80%, var(--c-acento));
+  --salvia: color-mix(in srgb, var(--c-fondo) 84%, var(--c-primario));
+  --sobre-oliva: color-mix(in srgb, var(--c-fondo) 92%, #fff);
+  --sobre-ocre: color-mix(in srgb, var(--c-texto) 88%, var(--c-primario));
+  --linea: color-mix(in srgb, var(--c-texto) 16%, transparent);
+  --linea-clara: color-mix(in srgb, var(--c-fondo) 24%, transparent);
+}
+@media (min-width: 1180px) { :root { --alto-cabecera: 5.25rem; } }
+
+@layer base {
+  html { scroll-padding-top: calc(var(--alto-cabecera) + .75rem); }
+  body { font-family: var(--fuente-texto); font-size: 1.125rem; line-height: 1.65; background: var(--crema); }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 600; letter-spacing: -0.018em; line-height: 1.06; }
+  :focus-visible { outline: 3px solid var(--ocre); outline-offset: 3px; }
+}
+
+@layer components {
+  /* ---------- Bandas a todo el ancho ---------- */
+  .banda { position: relative; padding-block: var(--ritmo); }
+  @media (min-width: 768px) { .banda { padding-block: var(--ritmo-md); } }
+  .banda--crema { background: var(--crema); color: var(--c-texto); }
+  .banda--trigo { background: var(--trigo); color: var(--c-texto); }
+  .banda--salvia { background: var(--salvia); color: var(--c-texto); }
+  .banda--oliva { background: var(--oliva); color: var(--sobre-oliva); }
+  .banda--honda { background: var(--oliva-honda); color: var(--sobre-oliva); }
+  .banda--ocre { background: var(--ocre); color: var(--sobre-ocre); }
+  .sin-relleno { padding-block: 0 !important; }
+
+  /* ---------- Titulares ---------- */
+  .antetitulo { display: inline-flex; align-items: center; gap: .75rem; font-size: .8rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ocre-texto); }
+  .antetitulo::before { content: ""; width: 2.25rem; height: 3px; border-radius: 3px; background: var(--ocre); flex-shrink: 0; }
+  .banda--oliva .antetitulo, .banda--honda .antetitulo, .portada .antetitulo, .pie .antetitulo { color: var(--ocre-luz); }
+  .banda--ocre .antetitulo { color: var(--sobre-ocre); }
+  .banda--ocre .antetitulo::before { background: var(--sobre-ocre); }
+  .titular { margin-bottom: 3rem; }
+  @media (min-width: 768px) { .titular { margin-bottom: 4rem; } }
+  .titulo-seccion { margin-top: 1rem; font-size: clamp(2.25rem, 5.2vw, 4.4rem); max-width: 18ch; }
+  .titular-texto { margin-top: 1.25rem; max-width: 40rem; font-size: 1.15rem; opacity: .88; }
+  .titular--centro { text-align: center; }
+  .titular--centro .titulo-seccion, .titular--centro .titular-texto { margin-inline: auto; }
+  .titular--partido { display: grid; gap: 1.25rem; align-items: end; }
+  @media (min-width: 1024px) {
+    .titular--partido { grid-template-columns: 7fr 5fr; gap: 5rem; }
+    .titular--partido .titular-texto { margin-top: 0; }
+  }
+
+  /* ---------- Botones: rectángulos amplios, ocre pleno ---------- */
+  .btn, .btn-sec { min-height: 3.25rem; padding: .8rem 1.6rem; border-radius: var(--radio); font-size: 1.05rem; font-weight: 700; }
+  .btn { background: var(--ocre); color: var(--sobre-ocre); border: 2px solid var(--ocre); }
+  .btn:hover { background: color-mix(in srgb, var(--ocre) 82%, #fff); }
+  .btn-sec { background: transparent; color: inherit; border: 2px solid currentColor; }
+  .btn-sec:hover { background: color-mix(in srgb, currentColor 10%, transparent); }
+  .btn--oliva { background: var(--oliva); color: var(--sobre-oliva); border-color: var(--oliva); }
+  .btn--oliva:hover { background: var(--oliva-honda); }
+  .botones { display: flex; flex-wrap: wrap; gap: .75rem 1rem; margin-top: 2.25rem; }
+  @media (max-width: 479px) { .botones .btn, .botones .btn-sec { width: 100%; } }
+
+  /* ---------- Cabecera: franja oliva con el teléfono + fila crema pegada arriba ---------- */
+  .cabecera--jardin { position: sticky; top: calc(var(--alto-franja) * -1); background: var(--crema); color: var(--c-texto); border-bottom: 1px solid var(--linea); }
+  .franja { background: var(--oliva); color: var(--sobre-oliva); font-size: .9rem; }
+  .franja .contenedor { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: var(--alto-franja); }
+  .franja a { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.5rem; font-weight: 700; text-decoration: none; }
+  .franja-horario { display: none; opacity: .85; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  @media (min-width: 768px) { .franja-horario { display: block; } }
+  .cabecera--jardin .cabecera-fila { min-height: var(--alto-cabecera); }
+  .marca-hoja { display: grid; place-items: center; flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 0 1.3rem 0 1.3rem; background: var(--oliva); color: var(--sobre-oliva); }
+  .marca-textos { display: grid; min-width: 0; line-height: 1.1; }
+  .marca-nombre { font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.4rem; letter-spacing: -0.01em; }
+  .marca-sub { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ocre-texto); margin-top: .2rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cabecera--jardin .cabecera-nav { gap: 1.6rem; font-weight: 600; font-size: 1rem; }
+  .cabecera--jardin .cabecera-nav a { padding-block: .5rem; border-bottom: 2px solid transparent; }
+  .cabecera--jardin .cabecera-nav a:hover { border-color: var(--ocre); }
+  .cabecera--jardin .menu-movil summary { min-height: 2.75rem; padding: .5rem .9rem; border: 2px solid var(--oliva); border-radius: var(--radio); color: var(--oliva); }
+  .cabecera--jardin .menu-movil-panel { background: var(--crema); padding: .5rem 1rem 1.25rem; border-bottom: 4px solid var(--oliva); font-size: 1.1rem; }
+  /* Con siete apartados, el menú completo cabe a partir de 1180 px */
+  @media (min-width: 900px) and (max-width: 1179px) {
+    .cabecera--jardin .cabecera-nav { display: none; }
+    .cabecera--jardin .menu-movil { display: block; }
+  }
+
+  /* ---------- Portada: foto a sangre + panel oliva con esquina de hoja ---------- */
+  .portada { position: relative; display: grid; background: var(--oliva-honda); color: var(--sobre-oliva); }
+  .portada-foto { position: relative; min-height: 44svh; }
+  .portada-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .portada-panel { position: relative; z-index: 1; margin-top: -2.5rem; padding: 2.75rem 1rem 3rem; background: var(--oliva); border-radius: 0 var(--hoja) 0 0; }
+  .portada-titulo { margin-top: 1.1rem; font-size: clamp(2.6rem, 8.5vw, 6rem); line-height: 1; letter-spacing: -0.03em; }
+  .portada-entradilla { margin-top: 1.4rem; max-width: 36rem; font-size: 1.15rem; opacity: .92; }
+  .portada .btn-sec { color: var(--sobre-oliva); }
+  .portada-datos { display: grid; gap: .75rem 2rem; margin-top: 2.25rem; padding-top: 1.5rem; border-top: 1px solid var(--linea-clara); }
+  .portada-datos li { display: flex; align-items: center; gap: .75rem; font-weight: 600; }
+  .portada-datos svg { flex-shrink: 0; color: var(--ocre-luz); }
+  @media (min-width: 560px) { .portada-datos { grid-template-columns: 1fr 1fr; } }
+  .portada--sin-foto .portada-panel { margin-top: 0; border-radius: 0; }
+  @media (min-width: 768px) { .portada-panel { padding: 3.5rem 2rem 3.5rem; } }
+  @media (min-width: 1024px) {
+    .portada { min-height: calc(100svh - var(--alto-cabecera)); min-height: max(40rem, calc(100svh - var(--alto-cabecera))); }
+    .portada-foto, .portada-panel { grid-area: 1 / 1; }
+    .portada-foto { min-height: 0; }
+    .portada-panel { align-self: end; justify-self: start; width: min(60%, 58rem); margin-top: 5rem; padding: 3.75rem 4.5rem 3.25rem max(2rem, calc((100vw - var(--ancho)) / 2 + 2rem)); }
+    .portada--sin-foto .portada-panel { width: 100%; align-self: center; background: transparent; }
+  }
+
+  /* ---------- Servicios: rejilla de 4 columnas separadas por filetes, sin tarjetas ---------- */
+  .servicios { display: grid; border-top: 2px solid var(--c-texto); }
+  .servicio { display: grid; grid-template-columns: 3.5rem 1fr; column-gap: 1.1rem; padding: 1.6rem 0; border-bottom: 1px solid var(--linea); }
+  .servicio > :not(.servicio-icono) { grid-column: 2; }
+  .servicio .servicio-titulo { margin-top: .1rem; }
+  .servicio-icono { grid-row: span 2; }
+  @media (min-width: 640px) { .servicio { display: block; padding: 2rem 0; } .servicio .servicio-titulo { margin-top: 1.25rem; } }
+  .servicio-icono { display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 0 1.75rem 0 1.75rem; background: var(--salvia); color: var(--oliva); }
+  .servicio-titulo { margin-top: 1.25rem; font-size: 1.55rem; }
+  .servicio-texto { margin-top: .6rem; opacity: .85; }
+  @media (min-width: 640px) {
+    .servicios { grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
+  }
+  @media (min-width: 1100px) {
+    .servicios { grid-template-columns: repeat(4, 1fr); column-gap: 0; }
+    .servicio { padding: 2.5rem 2rem 2.75rem; border-left: 1px solid var(--linea); }
+    .servicio:nth-child(4n + 1) { border-left: 0; padding-left: 0; }
+  }
+
+  /* ---------- Cifras: ocre pleno ---------- */
+  .cifras { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 1.5rem; }
+  .cifra-num { display: block; white-space: nowrap; font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(2.4rem, 6vw, 4.75rem); line-height: 1; letter-spacing: -0.03em; }
+  .cifra-texto { display: block; margin-top: .75rem; padding-top: .75rem; border-top: 2px solid var(--sobre-ocre); font-weight: 600; max-width: 16rem; }
+  @media (min-width: 1024px) { .cifras { grid-template-columns: repeat(var(--n, 4), 1fr); gap: 3rem; } }
+  .cifras-cabeza { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1rem 3rem; margin-bottom: 3rem; }
+  .cifras-cabeza .titulo-seccion { font-size: clamp(2rem, 4vw, 3.25rem); }
+
+  /* ---------- Estancias: columnas sobre oliva honda, fotos con forma de hoja ---------- */
+  .estancias { display: grid; gap: 3.5rem 2.5rem; }
+  @media (min-width: 720px) { .estancias { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1280px) { .estancias { grid-template-columns: repeat(var(--n, 4), 1fr); gap: 2.5rem; } }
+  .estancia { display: flex; flex-direction: column; }
+  .estancia-foto { aspect-ratio: 4 / 3; overflow: hidden; border-radius: var(--hoja) 0 var(--hoja) 0; background: var(--oliva); }
+  @media (min-width: 720px) { .estancia-foto { aspect-ratio: 4 / 5; } }
+  @media (min-width: 1280px) { .estancia-foto { border-radius: calc(var(--hoja) * .7) 0 calc(var(--hoja) * .7) 0; } }
+  .estancia-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .estancia-num { margin-top: 1.5rem; font-family: var(--fuente-titulos); font-size: 1rem; color: var(--ocre-luz); }
+  .estancia-titulo { margin-top: .35rem; font-size: clamp(1.7rem, 2.4vw, 2.1rem); }
+  .estancia-precio { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem; margin-top: 1rem; padding: .7rem 0; border-block: 1px solid var(--linea-clara); }
+  .estancia-precio b { font-family: var(--fuente-titulos); font-size: 1.6rem; font-weight: 600; color: var(--ocre-luz); }
+  .estancia-texto { margin-top: 1rem; opacity: .9; }
+  .estancia-incluye { display: grid; gap: .5rem; margin-top: 1.25rem; font-size: 1rem; }
+  .estancia-incluye li { display: flex; gap: .6rem; align-items: flex-start; }
+  .estancia-incluye svg { flex-shrink: 0; margin-top: .2rem; color: var(--ocre-luz); }
+
+  /* ---------- Instalaciones: mosaico de borde a borde ---------- */
+  .mosaico { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: var(--crema); }
+  .mosaico-foto { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: var(--salvia); }
+  .mosaico-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .mosaico-foto:hover img { transform: scale(1.03); }
+  .mosaico-foto:nth-child(3n + 1) { grid-column: span 2; aspect-ratio: 16 / 9; }
+  @media (min-width: 900px) {
+    .mosaico { grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(14rem, 22vw, 22rem); }
+    .mosaico-foto, .mosaico-foto:nth-child(3n + 1) { grid-column: auto; aspect-ratio: auto; }
+    .mosaico-foto:nth-child(6n + 1) { grid-column: span 2; grid-row: span 2; }
+    .mosaico-foto:nth-child(6n + 4), .mosaico-foto:nth-child(6n + 5), .mosaico-foto:nth-child(6n + 6) { grid-column: span 2; }
+    .mosaico { grid-auto-flow: dense; }
+  }
+
+  /* ---------- Un día: foto a sangre a la izquierda + línea del día ---------- */
+  .partida { display: grid; }
+  .partida-foto { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
+  .partida-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .partida-texto { padding: var(--ritmo) 1rem; }
+  @media (min-width: 768px) { .partida-texto { padding: var(--ritmo-md) 2rem; } }
+  @media (min-width: 1024px) {
+    .partida { grid-template-columns: 1fr 1fr; }
+    .partida-foto { aspect-ratio: auto; min-height: 32rem; border-radius: 0 var(--hoja) 0 0; }
+    .partida-texto { padding: var(--ritmo-md) max(2rem, calc((100vw - var(--ancho)) / 2 + 2rem)) var(--ritmo-md) 5rem; }
+    .partida--invertida .partida-foto { order: 2; border-radius: var(--hoja) 0 0 0; }
+    .partida--invertida .partida-texto { padding: var(--ritmo-md) 5rem var(--ritmo-md) max(2rem, calc((100vw - var(--ancho)) / 2 + 2rem)); }
+  }
+  .linea-dia { position: relative; display: grid; gap: 0; margin-top: 2.5rem; }
+  .linea-dia li { position: relative; display: grid; grid-template-columns: 5.5rem 1fr; gap: 1rem; padding: 1.1rem 0; border-top: 1px solid var(--linea); }
+  .linea-dia li:last-child { border-bottom: 1px solid var(--linea); }
+  .linea-dia-hora { font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.65rem; line-height: 1.1; color: var(--oliva); }
+  .linea-dia-actividad { align-self: center; }
+  @media (min-width: 640px) { .linea-dia li { grid-template-columns: 7.5rem 1fr; } .linea-dia-hora { font-size: 2rem; } }
+
+  /* ---------- Equipo ---------- */
+  .equipo { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 1.25rem; }
+  @media (min-width: 1024px) { .equipo { grid-template-columns: repeat(4, 1fr); gap: 3rem 2.5rem; } }
+  .persona-foto { aspect-ratio: 3 / 4; overflow: hidden; border-radius: 50% 50% var(--radio) var(--radio) / 38% 38% var(--radio) var(--radio); background: var(--trigo); }
+  .persona-foto img { width: 100%; height: 100%; object-fit: cover; }
+  .persona-nombre { margin-top: 1.1rem; font-size: clamp(1.25rem, 2vw, 1.6rem); }
+  .persona-cargo { margin-top: .3rem; font-size: 1rem; color: var(--ocre-texto); font-weight: 600; }
+  .persona-texto { margin-top: .5rem; font-size: 1rem; opacity: .85; }
+
+  /* ---------- Visita: ocre pleno + formulario sobre oliva honda, a sangre ---------- */
+  .visita { display: grid; }
+  .visita-texto { background: var(--ocre); color: var(--sobre-ocre); padding: var(--ritmo) 1rem; }
+  .visita-form { background: var(--oliva-honda); color: var(--sobre-oliva); padding: var(--ritmo) 1rem; }
+  @media (min-width: 768px) { .visita-texto, .visita-form { padding: var(--ritmo-md) 2rem; } }
+  @media (min-width: 1024px) {
+    .visita { grid-template-columns: 1fr 1fr; }
+    .visita-texto { padding: var(--ritmo-md) 5rem var(--ritmo-md) max(2rem, calc((100vw - var(--ancho)) / 2 + 2rem)); }
+    .visita-form { padding: var(--ritmo-md) max(2rem, calc((100vw - var(--ancho)) / 2 + 2rem)) var(--ritmo-md) 5rem; border-radius: var(--hoja) 0 0 0; margin-left: calc(var(--hoja) * -.5); position: relative; }
+  }
+  .visita-texto .antetitulo { color: var(--sobre-ocre); }
+  .visita-texto .antetitulo::before { background: var(--sobre-ocre); }
+  @media (min-width: 1024px) { .visita { background: var(--ocre); } }
+  .pasos { display: grid; gap: 1.25rem; margin-top: 2.5rem; counter-reset: paso; }
+  .pasos li { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; align-items: start; counter-increment: paso; }
+  .pasos li::before { content: counter(paso); display: grid; place-items: center; width: 3rem; height: 3rem; border-radius: 0 1.5rem 0 1.5rem; background: var(--sobre-ocre); color: var(--ocre); font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.35rem; }
+  .pasos-titulo { font-weight: 700; font-size: 1.15rem; }
+  .pasos-texto { opacity: .9; }
+  .visita-nota { margin-top: 1.25rem; font-size: 1rem; opacity: .9; }
+
+  /* ---------- Opiniones: la primera enorme sobre oliva ---------- */
+  .cita-grande { position: relative; font-family: var(--fuente-titulos); font-weight: 500; font-size: clamp(1.75rem, 4.2vw, 3.6rem); line-height: 1.15; letter-spacing: -0.02em; max-width: 30ch; }
+  .cita-grande::before { content: "“"; display: block; font-size: 1.8em; line-height: .6; color: var(--ocre-luz); margin-bottom: .2em; }
+  .cita-autor { margin-top: 2rem; font-weight: 700; }
+  .cita-autor span { display: block; font-weight: 400; opacity: .8; }
+  .citas { display: grid; gap: 2.5rem; margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--linea-clara); }
+  @media (min-width: 768px) { .citas { grid-template-columns: 1fr 1fr; gap: 4rem; } }
+  .cita-pequena { font-size: 1.2rem; }
+
+  /* ---------- Contacto ---------- */
+  .contacto-rejilla { display: grid; gap: 3rem; align-items: start; }
+  @media (min-width: 1024px) { .contacto-rejilla { grid-template-columns: 6fr 5fr; gap: 6rem; } }
+  .vias { display: grid; margin-top: 2rem; border-top: 2px solid var(--c-texto); }
+  .vias li { display: grid; gap: .25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--linea); }
+  @media (min-width: 640px) { .vias li { grid-template-columns: 9rem 1fr; gap: 1.5rem; align-items: baseline; } }
+  .vias-etiqueta { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ocre-texto); }
+  .vias-dato { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.3rem, 2.4vw, 1.9rem); line-height: 1.2; text-decoration: none; overflow-wrap: anywhere; }
+  .vias-dato:hover { color: var(--oliva); }
+  .vias-grande { font-size: clamp(2rem, 5vw, 3.4rem); color: var(--oliva); }
+  .contacto-form { padding: 2rem 1rem; margin-inline: -1rem; background: var(--crema); border-radius: 0; }
+  @media (min-width: 768px) { .contacto-form { padding: 3rem; margin-inline: 0; border-radius: 0 var(--hoja) 0 var(--hoja); } }
+
+  /* ---------- Formulario ---------- */
+  .formulario { gap: 1.1rem; }
+  .formulario-fila { display: grid; gap: 1.1rem; }
+  @media (min-width: 640px) { .formulario-fila { grid-template-columns: 1fr 1fr; } }
+  .campo label { font-size: 1rem; }
+  .campo input, .campo textarea, .campo select { width: 100%; min-height: 3.25rem; font: inherit; font-size: 1.05rem; color: inherit; background: var(--crema); padding: .75rem .9rem; border: 2px solid color-mix(in srgb, var(--c-texto) 22%, transparent); border-radius: var(--radio); }
+  .campo input:focus, .campo textarea:focus, .campo select:focus { border-color: var(--oliva); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--ocre) 45%, transparent); }
+  .formulario--oscuro .campo input, .formulario--oscuro .campo textarea, .formulario--oscuro .campo select { background: color-mix(in srgb, var(--oliva-honda) 70%, #000); color: var(--sobre-oliva); border-color: var(--linea-clara); }
+  .formulario--oscuro .campo select option { color: #000; background: #fff; }
+  .formulario--oscuro a { color: var(--ocre-luz); }
+  .campo-check { font-size: 1rem; }
+  .campo-check input { width: 1.25rem; height: 1.25rem; accent-color: var(--ocre); }
+  .formulario-aviso { font-size: .9rem; }
+
+  /* ---------- Pie ---------- */
+  .pie--jardin { background: var(--oliva-honda); color: var(--sobre-oliva); padding-top: 0; }
+  .pie-banda { background: var(--oliva); }
+  .pie-banda .contenedor { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 3rem; padding-block: 2.75rem; }
+  .pie-llamada { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.6rem, 3.5vw, 2.6rem); line-height: 1.15; max-width: 22ch; }
+  .pie-telefono { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(1.8rem, 4vw, 3rem); color: var(--ocre-luz); text-decoration: none; white-space: nowrap; }
+  .pie-columnas { display: grid; gap: 2.5rem; padding-block: 4rem 1rem; }
+  @media (min-width: 720px) { .pie-columnas { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1100px) { .pie-columnas { grid-template-columns: 2fr 1.5fr 1fr 1.5fr; gap: 3rem; } }
+  .pie--jardin .pie-nombre { font-family: var(--fuente-titulos); font-weight: 600; font-size: 1.9rem; line-height: 1.1; }
+  .pie--jardin .pie-titulo { color: var(--ocre-luz); opacity: 1; font-weight: 700; letter-spacing: .14em; }
+  .pie--jardin .pie-lista { font-size: 1.02rem; }
+  .pie--jardin .pie-lista a { display: inline-block; padding-block: .3rem; }
+  .pie--jardin .pie-redes a { min-width: 2.75rem; min-height: 2.75rem; align-items: center; justify-content: center; border: 1px solid var(--linea-clara); border-radius: 0 1rem 0 1rem; }
+  .pie--jardin .pie-legal { margin-top: 2.5rem; border-color: var(--linea-clara); }
+  .pie--jardin .pie-legal a { color: inherit; }
+
+  /* ---------- 404 ---------- */
+  .error-cifra { font-family: var(--fuente-titulos); font-weight: 600; font-size: clamp(7rem, 26vw, 18rem); line-height: .9; letter-spacing: -0.05em; color: var(--ocre-luz); }
+
+  /* ---------- Página interior: cabecera de banda ---------- */
+  .cabeza-interior { padding-block: 4rem; }
+  @media (min-width: 768px) { .cabeza-interior { padding-block: 6rem 5rem; } }
+}

@@ -1,0 +1,47 @@
+---
+// Opiniones de las familias sobre oliva, a todo el ancho: la primera como cita enorme en serif con comilla ocre; el resto
+// debajo, en dos columnas, separadas por un filete. `testimonios` [{texto, autor, nota}] (`nota`: quién es, «Hija de
+// una residente»). Sin estrellas ni puntuaciones. Sin opiniones no se pinta.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const [primera, ...resto] = s?.testimonios ?? [];
+---
+
+{
+  s && primera && (
+    <Seccion id={Astro.props.id} banda="oliva">
+      <div class="grid gap-10 lg:grid-cols-[3fr_9fr] lg:gap-16">
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="mt-4 text-[1.9rem] lg:text-[2.3rem]">{s.titulo}</h2>}
+        </div>
+        <figure>
+          <blockquote class="cita-grande"><p>{primera.texto}</p></blockquote>
+          {primera.autor && (
+            <figcaption class="cita-autor">
+              {primera.autor}
+              {primera.nota && <span>{primera.nota}</span>}
+            </figcaption>
+          )}
+          {resto.length > 0 && (
+            <div class="citas">
+              {resto.map((t) => (
+                <figure>
+                  <blockquote class="cita-pequena"><p>«{t.texto}»</p></blockquote>
+                  {t.autor && (
+                    <figcaption class="cita-autor !mt-4">
+                      {t.autor}
+                      {t.nota && <span>{t.nota}</span>}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          )}
+        </figure>
+      </div>
+    </Seccion>
+  )
+}

@@ -1,0 +1,165 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas (nunca una lista dentro de un elemento de lista). Precios siempre entre comillas.
+nombre: Casa do Souto
+eslogan: Residencia y centro de día con jardín, a diez minutos de la muralla de Lugo.
+sector: residencia
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#4f5d2a"
+  acento: "#c98a2e"
+  fondo: "#f6efe0"
+  texto: "#2b2a1f"
+contacto:
+  telefono: "982 41 76 30"
+  email: hola@casadosouto.es
+  direccion: Camiño da Granxa 22, 27003 Lugo (Lugo)
+  horario: "Visitas todos los días de 10:00 a 13:00 y de 16:30 a 20:00. Teléfono atendido las 24 horas."
+  whatsapp: "+34 622 41 76 30"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Servicios, url: "/#servicios" }
+  - { texto: Estancias, url: "/#estancias" }
+  - { texto: La casa, url: "/#instalaciones" }
+  - { texto: Un día aquí, url: "/#un-dia" }
+  - { texto: Equipo, url: "/#equipo" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Concertar una visita, url: "/#visita" }
+seo:
+  titulo: Casa do Souto · Residencia y centro de día en Lugo
+  descripcion: "Residencia de mayores y centro de día en Lugo con jardín, enfermería día y noche, cocina propia y estancias temporales para el descanso de las familias."
+  tipo: NursingHome
+marca_pie: false
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Lugo · Residencia y centro de día"
+    titulo: Como en casa, con alguien cerca
+    texto: "Una casa de piedra rodeada de jardín y huerto donde cada persona mayor sigue con sus costumbres, su ritmo y su gente, con cuidados de enfermería a cualquier hora."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Concertar una visita, url: "/#visita" }
+    cta_secundario: { texto: Ver las estancias, url: "/#estancias" }
+    items:
+      - { titulo: Enfermería día y noche, icono: corazon }
+      - { titulo: Jardín y huerto propios, icono: hoja }
+      - { titulo: Cocina casera cada día, icono: cubiertos }
+      - { titulo: Visitas sin cita previa, icono: casa }
+
+  servicios:
+    activa: true
+    antetitulo: Lo que hacemos
+    titulo: Cuidados que se notan en lo pequeño
+    texto: "Un plan para cada persona, revisado con la familia cada pocos meses. Sin prisas, sin aire de hospital y con el mismo equipo de siempre."
+    items:
+      - { titulo: Enfermería y médico, texto: "Enfermería presente día y noche, visita médica semanal y control de la medicación de cada residente.", icono: corazon }
+      - { titulo: Fisioterapia, texto: "Sesiones diarias en el gimnasio o en el jardín para mantener la movilidad y prevenir caídas.", icono: usuarios }
+      - { titulo: Estimulación y memoria, texto: "Talleres de memoria, lectura del periódico, música y juegos de mesa con la terapeuta ocupacional.", icono: lapiz }
+      - { titulo: Cocina propia, texto: "Comida gallega de siempre hecha aquí cada día, con dietas adaptadas y texturas para quien lo necesite.", icono: cubiertos }
+      - { titulo: Peluquería y podología, texto: "Peluquería dos días a la semana y podología cada quince días, sin salir de casa.", icono: estrella }
+      - { titulo: Huerto y paseos, texto: "Quien quiere planta, riega y recoge. Paseos acompañados por el jardín y por el barrio.", icono: hoja }
+      - { titulo: Transporte al centro de día, texto: "Recogida y vuelta a casa en furgoneta adaptada por Lugo y alrededores.", icono: coche }
+      - { titulo: Atención a las familias, texto: "Una persona de referencia para cada familia, noticias por teléfono y reuniones cuando hagan falta.", icono: mensaje }
+
+  cifras:
+    activa: true
+    antetitulo: La casa en números
+    titulo: Pequeña a propósito
+    items:
+      - { titulo: "42", texto: Plazas residenciales }
+      - { titulo: "20", texto: Plazas de centro de día }
+      - { titulo: "3.000 m²", texto: De jardín y huerto }
+      - { titulo: "24 h", texto: Enfermería presente }
+
+  estancias:
+    activa: true
+    antetitulo: Estancias y servicios
+    titulo: Para quedarse, para el día o para unas semanas
+    texto: "Os enseñamos la casa antes de decidir nada y os damos el precio por escrito, con todo lo que incluye."
+    estancias:
+      - { nombre: Plaza residencial, texto: "Habitación individual o doble con baño adaptado, luz natural y vistas al jardín. Para vivir aquí con todos los cuidados.", precio: "desde 1.890 €", periodo: al mes, incluye: "Habitación con baño; pensión completa; enfermería 24 h; fisioterapia; lavandería y planchado", imagen: /fotos/estancia-1.jpg }
+      - { nombre: Centro de día, texto: "De lunes a viernes, de 9:00 a 19:00. Por la mañana actividades y fisioterapia, comida aquí y vuelta a casa por la tarde.", precio: "desde 690 €", periodo: al mes, incluye: "Desayuno, comida y merienda; talleres y fisioterapia; transporte adaptado opcional", imagen: /fotos/estancia-2.jpg }
+      - { nombre: Estancia temporal, texto: "Unas semanas tras una operación o para que la familia descanse. Con los mismos cuidados que una plaza fija.", precio: "desde 75 €", periodo: al día, incluye: "Habitación con baño; pensión completa; enfermería 24 h; mínimo una semana", imagen: /fotos/estancia-3.jpg }
+      - { nombre: Ayuda a domicilio, texto: "Auxiliares del mismo equipo que van a casa para el aseo, las comidas, la medicación o acompañar a pasear.", precio: "desde 18 €", periodo: la hora, incluye: "Aseo y movilización; preparación de comidas; acompañamiento al médico", imagen: /fotos/estancia-4.jpg }
+    cta: { texto: Pedir información de precios, url: "/#visita" }
+
+  instalaciones:
+    activa: true
+    antetitulo: La casa
+    titulo: Una casa de piedra con las ventanas al jardín
+    texto: "Una sola planta, sin escalones, con salas luminosas, un comedor que da al huerto y un jardín con bancos a la sombra de los robles."
+    galeria:
+      - /fotos/instalacion-1.jpg
+      - /fotos/instalacion-2.jpg
+      - /fotos/instalacion-3.jpg
+      - /fotos/instalacion-4.jpg
+      - /fotos/instalacion-5.jpg
+      - /fotos/instalacion-6.jpg
+
+  un-dia:
+    activa: true
+    antetitulo: Un día en la casa
+    titulo: Cada uno a su ritmo
+    texto: "Hay horas para comer y para los talleres, pero nadie tiene que levantarse a la fuerza ni hacer lo que no le apetece."
+    imagen: /fotos/dia.jpg
+    horario:
+      - { hora: "8:30", actividad: "Despertar sin prisas y desayuno en el comedor o en la habitación" }
+      - { hora: "10:00", actividad: "Fisioterapia, paseo por el jardín o trabajo en el huerto" }
+      - { hora: "11:30", actividad: "Taller de memoria, lectura del periódico o música" }
+      - { hora: "13:30", actividad: "Comida casera y sobremesa tranquila" }
+      - { hora: "16:30", actividad: "Visitas de las familias, merienda y juegos de mesa" }
+      - { hora: "20:00", actividad: "Cena ligera y tiempo libre antes de dormir" }
+
+  equipo:
+    activa: true
+    antetitulo: Quién cuida
+    titulo: El mismo equipo, todos los días
+    texto: "Profesionales con muchos años en la casa. Los residentes los conocen por su nombre, y ellos a los residentes."
+    personas:
+      - { nombre: Marta Lousada, cargo: Directora y trabajadora social, foto: /placeholders/persona.svg }
+      - { nombre: Xoán Piñeiro, cargo: Enfermero coordinador, foto: /placeholders/persona.svg }
+      - { nombre: Lucía Varela, cargo: Fisioterapeuta, foto: /placeholders/persona.svg }
+      - { nombre: Rosa Castiñeira, cargo: Terapeuta ocupacional, foto: /placeholders/persona.svg }
+
+  visita:
+    activa: true
+    antetitulo: Ven a conocernos
+    titulo: La mejor forma de decidir es venir
+    texto: "Os enseñamos la casa con calma, os presentamos al equipo y resolvemos todas las dudas. Sin compromiso y, si queréis, con un café en el jardín."
+    items:
+      - { titulo: Nos escribís o llamáis, texto: "Contadnos para quién es y qué necesita." }
+      - { titulo: Visitáis la casa, texto: "El día y la hora que os vengan bien, también en fin de semana." }
+      - { titulo: Preparamos su plan, texto: "Con la familia y, si puede, con la propia persona." }
+    cta: { texto: Llamar ahora, url: "tel:982417630" }
+    nota: "Respondemos en el mismo día. Si hay urgencia, llamad: el teléfono se atiende día y noche."
+
+  opiniones:
+    activa: true
+    antetitulo: Las familias
+    titulo: Lo que nos cuentan
+    testimonios:
+      - { texto: "Mi madre llegó muy triste y a los dos meses ya tenía su sitio en el huerto y sus amigas de la partida. Ahora cuando vamos a verla nos dice que tiene prisa.", autor: Carmen R., nota: "Hija de una residente" }
+      - { texto: "El centro de día nos ha devuelto la tranquilidad. Mi padre vuelve a casa contento y nosotros trabajamos sabiendo que está bien cuidado.", autor: Andrés L., nota: "Hijo de un usuario del centro de día" }
+      - { texto: "Estuvo tres semanas después de operarse de la cadera. La fisioterapeuta fue un regalo: salió andando mejor que antes.", autor: Pilar M., nota: "Estancia temporal" }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que nos preguntan las familias
+    preguntas:
+      - { pregunta: "¿Podemos visitarla cuando queramos?", respuesta: "Sí. Las visitas son libres de 10:00 a 13:00 y de 16:30 a 20:00, todos los días. Fuera de ese horario, avisad antes y lo organizamos." }
+      - { pregunta: "¿Puede traer sus muebles y sus cosas?", respuesta: "Claro. Animamos a que cada uno traiga su sillón, sus fotos y lo que le haga sentirse en casa, siempre que la habitación lo permita." }
+      - { pregunta: "¿Atendéis a personas con demencia o mucha dependencia?", respuesta: "Sí. Tenemos plazas para personas con alzhéimer y otras demencias, con un plan de cuidados y actividades adaptado a cada fase." }
+      - { pregunta: "¿Se puede pagar con la ayuda a la dependencia?", respuesta: "Algunas plazas pueden pagarse en parte con la prestación vinculada al servicio que concede la Xunta. Os ayudamos con los trámites." }
+      - { pregunta: "¿Qué pasa si se pone enfermo?", respuesta: "Enfermería está en la casa día y noche y hay visita médica semanal. Si hace falta ir al hospital, acompañamos al residente y avisamos a la familia al momento." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Estamos aquí para hablar
+    texto: "Llamad a cualquier hora o escribidnos. Si preferís venir sin avisar, la puerta está abierta en horario de visitas."

@@ -1,0 +1,61 @@
+---
+// Contacto sobre trigo: a la izquierda, titular y vías de contacto en filas con rótulo (el teléfono, enorme en oliva;
+// WhatsApp, email, dirección con enlace al mapa y horario de site.yaml → contacto); a la derecha, el formulario (mailto)
+// en un bloque crema con esquinas de hoja.
+import { seccion, site, tel, whatsapp, mapa } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} banda="trigo">
+      <div class="contacto-rejilla">
+        <div>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {(c.telefono || c.whatsapp || c.email || c.direccion || c.horario) && (
+            <ul class="vias">
+              {c.telefono && (
+                <li>
+                  <span class="vias-etiqueta">Teléfono</span>
+                  <a class="vias-dato vias-grande" href={tel(c.telefono)}>{c.telefono}</a>
+                </li>
+              )}
+              {c.whatsapp && (
+                <li>
+                  <span class="vias-etiqueta">WhatsApp</span>
+                  <a class="vias-dato" href={whatsapp(c.whatsapp, `Hola, os escribo desde la web de ${site.nombre}`)} rel="noopener" target="_blank">{c.whatsapp}</a>
+                </li>
+              )}
+              {c.email && (
+                <li>
+                  <span class="vias-etiqueta">Email</span>
+                  <a class="vias-dato" href={`mailto:${c.email}`}>{c.email}</a>
+                </li>
+              )}
+              {c.direccion && (
+                <li>
+                  <span class="vias-etiqueta">Dirección</span>
+                  <a class="vias-dato" href={mapa(c.direccion)} rel="noopener" target="_blank">{c.direccion}</a>
+                </li>
+              )}
+              {c.horario && (
+                <li>
+                  <span class="vias-etiqueta">Horario</span>
+                  <span>{c.horario}</span>
+                </li>
+              )}
+            </ul>
+          )}
+        </div>
+        <div class="contacto-form">
+          <FormularioContacto prefijo={`c-${Astro.props.id}`} boton="Enviar" />
+        </div>
+      </div>
+    </Seccion>
+  )
+}

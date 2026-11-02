@@ -1,0 +1,11 @@
+---
+// Envoltorio de sección. Adaptado de AstroWind (WidgetWrapper.astro), © onWidget, licencia MIT (LICENSE-ASTROWIND.md).
+// Cada sección es una banda de borde a borde (`banda` = crema, trigo, salvia, oliva, honda u ocre); el contenido va en
+// `.contenedor` (90 rem como mucho, 16 px de margen lateral en móvil). `sangre`: sin contenedor (filas a sangre).
+interface Props { id?: string; class?: string; banda?: string; contenedor?: string; as?: string; etiqueta?: string; sangre?: boolean }
+const { id, class: clase = '', banda = 'crema', contenedor = '', as: Etiqueta = 'section', etiqueta, sangre = false } = Astro.props;
+---
+
+<Etiqueta class:list={['banda', `banda--${banda}`, clase]} id={id} aria-label={etiqueta}>
+  {sangre ? <slot /> : <div class:list={['contenedor', contenedor]}><slot /></div>}
+</Etiqueta>

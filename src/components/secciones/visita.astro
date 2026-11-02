@@ -1,0 +1,43 @@
+---
+// Concertar una visita: dos bloques de color a sangre, 50/50 en escritorio. A la izquierda, ocre pleno con el titular,
+// los pasos numerados en hojas (`items` [{titulo, texto}]), el botón (`cta`: llamar o WhatsApp; sin él, llama al
+// teléfono de contacto) y la `nota`. A la derecha, oliva honda con esquina de hoja y el formulario (mailto) con
+// el servicio que interesa (las estancias de la web) y el día preferido.
+import { seccion, site, tel, nueva } from '../../data/site';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const boton = s?.cta?.url ? s.cta : c.telefono ? { texto: `Llamar al ${c.telefono}`, url: tel(c.telefono) } : null;
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda sin-relleno">
+      <div class="visita">
+        <div class="visita-texto">
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.texto && <p class="titular-texto">{s.texto}</p>}
+          {s.items.length > 0 && (
+            <ol class="pasos">
+              {s.items.map((it) => (
+                <li>
+                  <div>
+                    <p class="pasos-titulo">{it.titulo}</p>
+                    {it.texto && <p class="pasos-texto">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+          {boton && <p class="mt-10"><a class="btn btn--oliva" href={boton.url} {...nueva(boton.url)}>{boton.texto}</a></p>}
+          {s.nota && <p class="visita-nota">{s.nota}</p>}
+        </div>
+        <div class="visita-form">
+          <FormularioContacto oscuro visita prefijo={`v-${Astro.props.id}`} boton="Pedir la visita" asunto={`Quiero visitar ${site.nombre}`} />
+        </div>
+      </div>
+    </section>
+  )
+}
